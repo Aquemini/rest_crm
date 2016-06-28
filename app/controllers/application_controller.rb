@@ -20,6 +20,16 @@ class ApplicationController < ActionController::API
     end
   end
 
+
+  # private
+  #
+  # def authenticate
+  #   authenticate_or_request_with_http_digest do |username|
+  #     USERS[username]
+  #   end
+  # end
+
+
   def authenticate_user_from_token
     unless authenticate_with_http_token { |token, options| User.find_by(auth_token: token) }
       render json: { error: 'Bad Token'}, status: 401
